@@ -5,11 +5,12 @@ sysbuild
 *.sln
 *.opensdf
 log.txt
-externals
 support
 build
 *.o
 *.dylib
+*.pdb
+*.ilk
 
 *.xcworkspace
 xcuserdata
