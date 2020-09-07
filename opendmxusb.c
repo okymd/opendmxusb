@@ -147,7 +147,7 @@ void *opendmxusb_new(t_symbol *s, long argc, t_atom *argv)
 			}
 		}
 		object_post((t_object*)x, "DMX ch %ld", x->numCh);
-		usb_connect(x);
+		//usb_connect(x);
 	}
 	return (x);
 }
@@ -213,9 +213,14 @@ void usb_connect(t_dummy* x) {
 }
 void usb_close(t_dummy* x) {
 
-	FT_W32_CloseHandle(x->ftHandle);
-	object_post((t_object*)x, "Close");
-	x->is_usb_connected = false;
+	if (x->is_usb_connected) {
+		FT_W32_CloseHandle(x->ftHandle);
+		object_post((t_object*)x, "Close");
+		x->is_usb_connected = false;
+	}
+	else {
+		object_post((t_object*)x, "No device opened");
+	}
 }
 
 
